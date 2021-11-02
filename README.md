@@ -5,7 +5,9 @@
 ## Requirements
 
 * PHP 5.3
-* Symfony 2.*
+* symfony/http-kernel >= 2.0
+* symfony/config >= 2.0
+* symfony/dependency-injection >= 2.0
 * cmfcmf/openweathermap-php-api 2.0
 
 ## Configuration
@@ -17,15 +19,15 @@ owm.curl.fetcher:
 owm.cache:
     class: Riverline\OpenWeatherMapBundle\Cache\MemcachedOwmCache
     arguments:
-        - @cache
-        - %kernel.environment%-owm-%%s
+        - '@cache'
+        - '%kernel.environment%-owm-%%s'
 
 riverline_open_weather_map:
-    api_key: %riverline_open_weather_map.api_key%
+    api_key: '%riverline_open_weather_map.api_key%'
     fetcher_service_id: owm.curl.fetcher
-    lang: %locale%
+    lang: '%locale%'
     mode: json
     units: metric
     cache_service_id: owm.cache
-    cache_ttl: %riverline_open_weather_map.cache_ttl%
+    cache_ttl: '%riverline_open_weather_map.cache_ttl%'
 ```
