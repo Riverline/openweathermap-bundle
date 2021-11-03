@@ -1,32 +1,26 @@
 {
   "name": "riverline/openweathermap-bundle",
-  "description": "Riverline OpenWeatherMap Bundle for Symfony",
-  "keywords": ["riverline", "openweathermap", "open", "weather", "map", "symfony", "bundle"],
+  "description": "Webrivage OpenWeatherMap Bundle for Symfony",
+  "keywords": ["webrivage", "riverline", "openweathermap", "open", "weather", "map", "symfony", "bundle"],
   "type":"library",
   "license":"MIT",
   "authors":[
     {
       "name":"Romain Cambien",
-      "email":"romain@riverline.fr"
-    },
-    {
-      "name":"Sebastien Porati",
-      "email":"sebastien@riverline.fr"
+      "email":"romain@webrivage.com"
     },
     {
       "name":"Julien Bandelier",
-      "email":"julien.bandelier@riverline.fr"
-    },
-    {
-      "name":"Riverline",
-      "homepage":"http://www.riverline.fr"
+      "email":"julien.bandelier@webrivage.com"
     }
   ],
   "homepage": "https://github.com/Riverline/openweathermap-bundle",
   "require": {
     "php": ">=5.3.0",
     "cmfcmf/openweathermap-php-api": "~2.0",
-    "symfony/symfony": "2.*"
+    "symfony/http-kernel": ">=2.0",
+    "symfony/config": ">=2.0",
+    "symfony/dependency-injection": ">=2.0"
   },
   "autoload": {
     "psr-0": {

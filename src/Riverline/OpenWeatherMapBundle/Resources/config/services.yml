@@ -2,10 +2,10 @@ services:
   riverline.openweathermap:
     class: Riverline\OpenWeatherMapBundle\Service\OpenWeatherMapService
     arguments:
-      - %riverline_open_weather_map.api_key%
-      - %riverline_open_weather_map.units%
-      - @?riverline_open_weather_map.fetcher
-      - @?riverline_open_weather_map.cache
-      - %riverline_open_weather_map.cache_ttl%
-      - %riverline_open_weather_map.lang%
-      - %riverline_open_weather_map.mode%
+      - '%riverline_open_weather_map.api_key%'
+      - '%riverline_open_weather_map.units%'
+      - '@?riverline_open_weather_map.fetcher'
+      - '@?riverline_open_weather_map.cache'
+      - '%riverline_open_weather_map.cache_ttl%'
+      - '%riverline_open_weather_map.lang%'
+      - '%riverline_open_weather_map.mode%'
