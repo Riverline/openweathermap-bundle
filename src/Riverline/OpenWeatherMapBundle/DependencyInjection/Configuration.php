@@ -8,8 +8,8 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('riverline_open_weather_map');
+        $treeBuilder = new TreeBuilder('riverline_open_weather_map');
+        $rootNode = $treeBuilder->getRootNode();
         $rootNode
             ->children()
                 ->scalarNode('api_key')
