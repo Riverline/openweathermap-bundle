@@ -8,8 +8,15 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('riverline_open_weather_map');
+        $treeBuilder = new TreeBuilder('riverline_open_weather_map');
+
+        if (method_exists($treeBuilder, 'getRootNode')) {
+            $rootNode = $treeBuilder->getRootNode();
+        } else {
+            // BC layer for symfony/config 4.1 and older
+            $rootNode = $treeBuilder->root('riverline_open_weather_map');
+        }
+
         $rootNode
             ->children()
                 ->scalarNode('api_key')
