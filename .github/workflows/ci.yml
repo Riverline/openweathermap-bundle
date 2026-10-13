@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [master, develop]
+  pull_request:
+
+jobs:
+  tests:
+    name: PHP ${{ matrix.php }} / Symfony ${{ matrix.symfony }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.2', '8.4']
+        symfony: ['6.4.*', '7.4.*', '8.*']
+        exclude:
+          # Symfony 8 requires PHP 8.4.
+          - php: '8.2'
+            symfony: '8.*'
+
+    env:
+      SYMFONY_REQUIRE: ${{ matrix.symfony }}
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: curl, xml
+          tools: composer:v2, flex
+          coverage: none
+
+      - name: Validate composer.json
+        run: composer validate --strict
+
+      # symfony/flex (installed globally) pins every symfony/* package to SYMFONY_REQUIRE.
+      - name: Install dependencies
+        run: composer update --no-interaction --no-progress --prefer-dist
+
+      - name: Check the Symfony version under test
+        run: |
+          composer show 'symfony/*'
+          php -r 'require "vendor/autoload.php";
+            $version = Composer\InstalledVersions::getVersion("symfony/dependency-injection");
+            $expected = rtrim(getenv("SYMFONY_REQUIRE"), "*");
+            if (!str_starts_with($version, $expected)) {
+                fwrite(STDERR, "symfony/dependency-injection $version does not match SYMFONY_REQUIRE ".getenv("SYMFONY_REQUIRE")."\n");
+                exit(1);
+            }
+            echo "symfony/dependency-injection $version matches SYMFONY_REQUIRE ", getenv("SYMFONY_REQUIRE"), "\n";'
+
+      - name: Container smoke test and unit tests
+        run: vendor/bin/phpunit

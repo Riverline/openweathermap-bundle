@@ -3,7 +3,6 @@
 namespace Riverline\OpenWeatherMapBundle\Cache;
 
 use Cmfcmf\OpenWeatherMap\AbstractCache;
-use PDepend\Util\Cache\Driver\MemoryCacheDriver;
 
 /**
  * Example cache implementation.
