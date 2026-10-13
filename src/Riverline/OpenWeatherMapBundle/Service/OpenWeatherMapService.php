@@ -67,12 +67,12 @@ class OpenWeatherMapService
         $this->api_key      = $api_key;
         $this->units        = $units;
         $this->fetcher      = $fetcher;
-        $this->cacheClass   = $cache;
+        $this->cache        = $cache;
         $this->cacheTtl     = $cacheTtl;
         $this->lang         = $lang;
         $this->mode         = $mode;
 
-        $this->service  = new OpenWeatherMap($this->fetcher, $this->cacheClass, $this->cacheTtl);
+        $this->service  = new OpenWeatherMap($this->fetcher, $this->cache, $this->cacheTtl);
     }
 
     /**
